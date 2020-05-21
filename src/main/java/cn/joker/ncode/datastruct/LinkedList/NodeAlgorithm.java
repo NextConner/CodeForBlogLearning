@@ -174,4 +174,77 @@ public class NodeAlgorithm<E extends Comparable> {
         return midCount;
     }
 
+
+    /**
+     * LeetCode 第2题，两数之和
+     * 给定 A,B 单链表, 逆序存储非负整数，返回相加表示的的逆序链表，例如: 1-2-3 , 4-5-6 , 输出 : 5-7-8
+     */
+    public static Node<Integer> linkSum(Node<Integer> headA, Node<Integer> headB){
+
+        int index;
+        int sumResult= 0 ;
+        int sq=0;
+        while(headA!=null && headB!=null){
+            //当前数字的位数
+            int munumber = (int) Math.pow(10,sq);
+
+            int anum = headA.value*munumber;
+            int bnum = headB.value*munumber;
+            sumResult=sumResult + anum+bnum;
+            sq++;
+            headA=headA.next;
+            headB=headB.next;
+        }
+        System.out.println(sumResult);
+
+        Node<Integer> head = new Node<>();
+        Node<Integer> tail = new Node<>();
+        int i=0;
+        while(i<sq){
+            int munumber = (int) Math.pow(10,i);
+            Node<Integer> temp = new Node<>((573%(munumber*10))/munumber);
+            tail.next = temp;
+            if(head.next==null){
+                head.next=tail.next;
+            }
+            tail=tail.next;
+            i++;
+        }
+        return head;
+    }
+
+    public static void main(String[] args) {
+        Node<Integer> A = new Node<>(1);
+        Node<Integer> B = new Node<>(3);
+        Node<Integer> C = new Node<>(4);
+        A.next= B;
+        B.next=C;
+
+        Node<Integer> D = new Node<>(2);
+        Node<Integer> E = new Node<>(4);
+        Node<Integer> F = new Node<>(1);
+        D.next=E;
+        E.next=F;
+
+//        linkSum(A,D);
+
+        Integer num = 573;
+        Node<Integer> head = new Node<>();
+        Node<Integer> tail = new Node<>();
+        int sq = 3;
+        int i=0;
+        while(i<sq){
+            int munumber = (int) Math.pow(10,i);
+            Node<Integer> temp = new Node<>((573%(munumber*10))/munumber);
+            tail.next = temp;
+            if(head.next==null){
+                head.next=tail.next;
+            }
+            tail=tail.next;
+            i++;
+        }
+        System.out.println(head);
+
+    }
+
 }
