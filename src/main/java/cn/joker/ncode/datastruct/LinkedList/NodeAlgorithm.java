@@ -181,7 +181,6 @@ public class NodeAlgorithm<E extends Comparable> {
      */
     public static Node<Integer> linkSum(Node<Integer> headA, Node<Integer> headB){
 
-        int index;
         int sumResult= 0 ;
         int sq=0;
         while(headA!=null && headB!=null){
@@ -202,7 +201,7 @@ public class NodeAlgorithm<E extends Comparable> {
         int i=0;
         while(i<sq){
             int munumber = (int) Math.pow(10,i);
-            Node<Integer> temp = new Node<>((573%(munumber*10))/munumber);
+            Node<Integer> temp = new Node<>((sumResult%(munumber*10))/munumber);
             tail.next = temp;
             if(head.next==null){
                 head.next=tail.next;
@@ -210,12 +209,13 @@ public class NodeAlgorithm<E extends Comparable> {
             tail=tail.next;
             i++;
         }
-        return head;
+        return head.next;
     }
 
+
     public static void main(String[] args) {
-        Node<Integer> A = new Node<>(1);
-        Node<Integer> B = new Node<>(3);
+        Node<Integer> A = new Node<>(2);
+        Node<Integer> B = new Node<>(4);
         Node<Integer> C = new Node<>(4);
         A.next= B;
         B.next=C;
@@ -226,24 +226,11 @@ public class NodeAlgorithm<E extends Comparable> {
         D.next=E;
         E.next=F;
 
-//        linkSum(A,D);
+        Node<Integer> node = linkSum(A,D);
+        System.out.println(node.value + " : "+node.next.value + " : "+node.next.next.value);
 
-        Integer num = 573;
-        Node<Integer> head = new Node<>();
-        Node<Integer> tail = new Node<>();
-        int sq = 3;
-        int i=0;
-        while(i<sq){
-            int munumber = (int) Math.pow(10,i);
-            Node<Integer> temp = new Node<>((573%(munumber*10))/munumber);
-            tail.next = temp;
-            if(head.next==null){
-                head.next=tail.next;
-            }
-            tail=tail.next;
-            i++;
-        }
-        System.out.println(head);
+
+
 
     }
 
