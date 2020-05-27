@@ -75,7 +75,7 @@ public class NormalSearch {
 
 
     // 插入排序，a表示数组，n表示数组大小
-    public static void insertionSort(int[] a) {
+    public static int[] insertionSort(int[] a) {
         int count = 0;
         int n = a.length;
 
@@ -96,7 +96,7 @@ public class NormalSearch {
             a[j + 1] = temp;
 //            count++;
         }
-        System.out.println(count);
+        return a;
     }
 
 
@@ -134,9 +134,11 @@ public class NormalSearch {
 
     public static void main(String[] args) {
         int[] nums = {1,2,3,4,5,6};
-        bubbleSearch(nums);
-        insertionSort(nums);
-        selectionSorted(nums);
+//        bubbleSearch(nums);
+//        insertionSort(nums);
+//        selectionSorted(nums);
+        int[] a ={11,5};
+        bubbleSearch(a);
 
 //        for (int num : nums) {
 //            System.out.print(num + ",");
