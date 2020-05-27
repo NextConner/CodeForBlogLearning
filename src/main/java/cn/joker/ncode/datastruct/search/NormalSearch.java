@@ -28,7 +28,7 @@ public class NormalSearch {
             }
 
         }
-        System.out.println(count);
+//        System.out.println(count);
     }
 
 
