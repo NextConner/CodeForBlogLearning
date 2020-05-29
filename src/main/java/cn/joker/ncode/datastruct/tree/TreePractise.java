@@ -23,22 +23,31 @@ public class TreePractise {
     }
 
     /**
-     * 判断一棵树是否是平衡二叉树：各子树的高度差<=1
+     * 判断一棵树是否是高度平衡树：
+     * 1.各子树的高度差<=1
+     * 2.各子树也是高度平衡树
      */
     public static boolean isBlanacedTree(TreeNode root) {
-        return treeHeight(root) >-1;
+
+        //空根节点或无子节点
+        if (null == root) {
+            return true;
+        }
+        TreeNode left = root.left;
+        TreeNode right = root.right;
+        return Math.abs(treeHeight(left) - treeHeight(right)) <= 1  && isBlanacedTree(left) && isBlanacedTree(right);
     }
 
-    //计算当前节点的高度
-    private static int treeHeight(TreeNode node){
+    //计算当前节点左右子树高度差
+    private static int treeHeight(TreeNode root) {
 
-        //根节点高度差为0
-        if(null == node){
+        //空根节点
+        if (null == root) {
             return 0;
+        } else {
+            return 1 + Math.max(treeHeight(root.left),treeHeight(root.right));
         }
-
-        return 0;
-
+        
     }
 
 
@@ -49,19 +58,35 @@ public class TreePractise {
         TreeNode right = new TreeNode(2);
         TreeNode ll = new TreeNode(3);
         TreeNode lr = new TreeNode(3);
-        TreeNode rl = new TreeNode(4);
-        TreeNode rr = new TreeNode(4);
-        TreeNode root1 = new TreeNode(7);
-        TreeNode root2 = new TreeNode(8);
+        TreeNode rl = new TreeNode();
+        TreeNode rr = new TreeNode(3);
+        TreeNode lll = new TreeNode(4);
+        TreeNode llr = new TreeNode(4);
+        TreeNode rll = new TreeNode();
+        TreeNode rrr = new TreeNode(4);
+
 
         root.right = right;
         root.left = left;
         left.left = ll;
-        left.right = lr;
-//        ll.left=rl;
-//        ll.right=rr;
+        // left.right=lr;
+        right.right=rr;
+        ll.left = lll;
+        // ll.right=llr;
+        rr.right=rrr;
+//
+//        System.out.println(treeHeight(root));
+//        System.out.println(treeHeight(left));
+//        System.out.println(treeHeight(right));
+//        System.out.println(treeHeight(left.left));
+//        System.out.println(treeHeight(left.right));
+//        System.out.println(treeHeight(right.left));
+//        System.out.println(treeHeight(right.right));
+
 
         System.out.println(isBlanacedTree(root));
+                System.out.println(isBlanacedTree(left));
+                System.out.println(isBlanacedTree(right));
 
 
     }

@@ -2,7 +2,6 @@ package main
 
 import "fmt"
 
-//包含几种基础类型的数据类型
 type example struct{
 	flag bool
 	counter int16
@@ -11,7 +10,7 @@ type example struct{
 
 func mian()  {
 	
-	fmt.Printf("test")
+	
 
 	/*
 		1.声明和初始化
@@ -22,9 +21,8 @@ func mian()  {
 				进行对齐填充的地方
 				4.每两个字节的值必须跟随着两个字节的值，在struct 中由于 bool 1字节，int16 2字节，只有3字节，而且之后的 float32 是4字节长度，
 				所以对齐的位置在 bool 和 int16 之间
-				 
-
-	*/
-	
+				*/
+				fmt.Printf("go where");
+	fmt.Printf("test")
 
 }
