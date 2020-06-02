@@ -1,4 +1,4 @@
-package cn.joker.ncode.datastruct.search;
+package cn.joker.ncode.datastruct.sort;
 
 /**
  * 常见的普通排序算法

@@ -1,4 +1,4 @@
-package cn.joker.ncode.datastruct.search;
+package cn.joker.ncode.datastruct.sort;
 
 
 import java.util.ArrayList;
@@ -51,7 +51,7 @@ public class MergeSort {
         int[] b = Arrays.copyOfRange(a,start,end);
         int[] c = Arrays.copyOfRange(a,end,a.length);
         //数组返回的条件
-        return mergeArray(mergeSortByArrayCopy(b,0,(b.length)/2),mergeSortByArrayCopy(c,0,(c.length)/2));
+        return mergeArrayWithSort(mergeSortByArrayCopy(b,0,(b.length)/2),mergeSortByArrayCopy(c,0,(c.length)/2));
     }
 
     private static int[] mergeArray(int[] a,int[] b){
@@ -73,6 +73,54 @@ public class MergeSort {
             }
         }
         NormalSearch.bubbleSearch(c);
+        count++;
+        return c;
+    }
+
+
+    /**
+     * 1.因为在对数组进行排序之后，要合并的已经是有序数组，可以做到快速合并
+     * 2.考虑极端情况下，一个数组会完全插入到另一个数组的尾部
+     * 3.除此之外的情况就需要进行遍历处理了
+     * @param a
+     * @param b
+     * @return
+     */
+    private static int[] mergeArrayWithSort(int[] a,int[] b){
+
+
+        int al = a.length;
+        int bl = b.length;
+        if(null == a && null == b || (al == 0 && bl==0)){
+            return new int[]{};
+        }
+        int[] c = new int[a.length + b.length];
+        int k =0;
+        //判断极端情况下的插入
+        int i = 0;
+        int j = 0;
+        //这种方式可以保证其中一个数组的数据全部移动到临时数组中
+        while(i<al && j <bl){
+            //在排序中a的 i位置大于b的 j位置
+            if(a[i]<=b[j]){
+                c[k++] = a[i++];
+            }else{
+                c[k++] = b[j++];
+            }
+        }
+        //判断哪个数组还有剩余元素，直接进行复制
+        if(i>al-1){
+            //a数组遍历完成
+            while(j<bl){
+                c[k++]=b[j++];
+            }
+        }else{
+            while(i<al){
+                c[k++]=a[i++];
+            }
+        }
+
+//        NormalSearch.bubbleSearch(c);
         count++;
         return c;
     }
