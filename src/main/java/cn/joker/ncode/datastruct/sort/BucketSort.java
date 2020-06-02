@@ -103,21 +103,42 @@ public class BucketSort {
         //需要进行11次桶排序
         for (int j = 0; j < n; j++) {
             int bitNumber = Integer.valueOf(ph[j].split("")[k]);
-            switch(bitNumber){
-                case 9:bucket9[b9++]=ph[j];break;
-                case 8:bucket8[b8++]=ph[j];break;
-                case 7:bucket7[b7++]=ph[j];break;
-                case 6:bucket6[b6++]=ph[j];break;
-                case 5:bucket5[b5++]=ph[j];break;
-                case 4:bucket4[b4++]=ph[j];break;
-                case 3:bucket3[b3++]=ph[j];break;
-                case 2:bucket2[b2++]=ph[j];break;
-                case 1:bucket1[b1++]=ph[j];break;
-                case 0:bucket0[b0++]=ph[j];break;
+            switch (bitNumber) {
+                case 9:
+                    bucket9[b9++] = ph[j];
+                    break;
+                case 8:
+                    bucket8[b8++] = ph[j];
+                    break;
+                case 7:
+                    bucket7[b7++] = ph[j];
+                    break;
+                case 6:
+                    bucket6[b6++] = ph[j];
+                    break;
+                case 5:
+                    bucket5[b5++] = ph[j];
+                    break;
+                case 4:
+                    bucket4[b4++] = ph[j];
+                    break;
+                case 3:
+                    bucket3[b3++] = ph[j];
+                    break;
+                case 2:
+                    bucket2[b2++] = ph[j];
+                    break;
+                case 1:
+                    bucket1[b1++] = ph[j];
+                    break;
+                case 0:
+                    bucket0[b0++] = ph[j];
+                    break;
             }
         }
+        quiuckSort(bucket0, 0, b0, k - 1);
+        k--;
 
-        quiuckSort(bucket0,0,b0,k-1);
 
         System.out.println(ph);
     }
@@ -125,7 +146,7 @@ public class BucketSort {
 
     public static void quiuckSort(String[] nums, int start, int end, int bit) {
 
-        if (null == nums || nums.length <= 1 || start <= end) {
+        if (null == nums || nums.length <= 1 || start >= end) {
             return;
         }
         int pindex = partition(nums, start, end, bit);
@@ -139,25 +160,53 @@ public class BucketSort {
             return start;
         }
         String p = nums[end - 1];
-        int bitNumber = Integer.valueOf(p.split("")[bit]);
-        int i = 0;
-        for (int j = 0; j < nums.length; j++) {
-            if(StringUtils.isBlank(nums[j])){
-                continue;
-            }
-            int nbitNumber = Integer.valueOf(nums[j].split("")[bit]);
-            if (nbitNumber < bitNumber) {
-                String temp = nums[j];
-                nums[j] = p;
-                nums[i] = temp;
-                i++;
-            }
+        if (StringUtils.isBlank(p)) {
+            return start;
         }
-        String temp1 = nums[i];
-        nums[i] = nums[end - 1];
-        nums[end - 1] = temp1;
-
+        int k =9;
+        int bitNumber = k/2;
+        int i = 0;
+        while (bit > 0) {
+            while(bitNumber >0){
+                for (int j = 0; j < nums.length; j++) {
+                    if (StringUtils.isBlank(nums[j])) {
+                        continue;
+                    }
+                    int nbitNumber = Integer.valueOf(nums[j].split("")[bit]);
+                    if (nbitNumber < bitNumber) {
+                        String temp = nums[j];
+                        nums[j] = nums[i];
+                        nums[i] = temp;
+                        i++;
+                    }
+                }
+                String temp1 = nums[i];
+                nums[i] = nums[end - 1];
+                nums[end - 1] = temp1;
+                bit--;
+                i = 0;
+            }
+            bitNumber = bitNumber/2;
+        }
         return i;
+    }
+
+    //对字符类型的手机号码做按位排序
+    public static void phoneSort(String[] nums) {
+        int j = 10;
+        while (j > 0) {
+            for (int i = 0; i < nums.length - 1; i++) {
+                int li = Integer.valueOf(nums[i].split("")[j]);
+                int bi = Integer.valueOf(nums[i + 1].split("")[j]);
+                if (li > bi) {
+                    String temp = nums[i];
+                    nums[i] = nums[i + 1];
+                    nums[i + 1] = temp;
+                }
+            }
+            j--;
+        }
+        System.out.println(nums);
     }
 
 
@@ -166,13 +215,14 @@ public class BucketSort {
 //        int[] a={2,3,3,3,4,5,6,7,8,8,8,9,0,11,2,32,14,5,6,7,8,1,23,45,34,56,23,5,2,65,65,65,65,7,4,};
 //        counterSort(a);
 
-        List<String> list = FileUtils.readLines(new File("C:\\Users\\welcome\\Desktop\\data.txt"), "UTF-8");
+        List<String> list = FileUtils.readLines(new File("E:\\pythonData\\phoneNum.txt"), "UTF-8");
 
         List<String> list1 = list.subList(0, 2000);
 
         radisSort(list1.toArray(new String[0]));
-
-
+        System.out.println(list1);
+//        String[] nums = {"13570351393", "13573311492", "13570351351", "11370351393", "13570356333"};
+//        phoneSort(nums);
     }
 
 
