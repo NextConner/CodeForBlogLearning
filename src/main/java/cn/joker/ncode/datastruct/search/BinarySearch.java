@@ -133,7 +133,7 @@ public class BinarySearch {
         while (low <= high) {
             int value = a[mid];
             if (value < target) {
-                low = mid +1;
+                low = mid + 1;
                 mid = low + ((high - low) >> 1);
             } else if (value >= target) {
                 if (mid == 0 || (mid != 0 && a[mid - 1] < target)) {
@@ -150,30 +150,83 @@ public class BinarySearch {
 
     public static void main(String[] args) {
 
-//        int[] a = new int[100];
-//        int j = 0;
-//        for (int i = 0; i < 230; i++) {
-//            if (i % 2 == 0) {
-//                a[j] = i;
-//                j++;
-//                if (j >= 100) {
-//                    break;
-//                }
-//            }
-//        }
-//        long st1 = System.currentTimeMillis();
-//        System.out.println(binarySearch(a, 56));
-//        System.out.println(System.currentTimeMillis() - st1);
-//
-//        System.out.println("---------------");
-//        long st2 = System.currentTimeMillis();
-//        System.out.println(binarySearchRecursive(a, 0,a.length-1,56));
-//        System.out.println(System.currentTimeMillis() - st2);
-        int[] a = {1, 2, 3, 4, 5, 6, 6, 6, 7, 8, 8, 9, 11, 11, 11, 11, 11, 12, 12, 12, 14, 14, 15, 66, 67, 78, 89, 123, 145, 567};
-//        int n = 6;
-//        System.out.println(a[17] + ": " + a[18]);
-        System.out.println(binaryFirstMoreThanIndex(a, 5));
+        int[] a = {5, 6, 7, 8, 1, 2, 3, 4};
+        //分界点是3
+        int i = 3;
+        // a[0] a[3] 有序 , a[4] ~ [n-1] 有序 , a[n-1] < a[0]
+        int target = 2;
+        System.out.println(binarySearchInCycleArray(a, 4));
 
+    }
+
+    public static int binarySearchInCycleArray(int[] a, int target) {
+
+        /**
+         * 思路分解:
+         * 1. 如何找到数组分界点 ？  :  非头节点非尾节点的情况下,a[index] >a[index+1]
+         * 2. 确定分区点之后, a[0] ~ a[index] 有序 , a[index+1] ~ a[n-1] 有序
+         * 3. 根据 target 与 a[index] , a[0] , a[n-1] 的大小定位target 所处的区间
+         */
+        int n = a.length;
+        int index = -1;
+        int low = 0;
+        int high = n - 1;
+        int mid = low + ((high - low) >> 1);
+
+        for (int i = 0; i < n; i++) {
+
+            if (i != 0 && i != n - 1) {
+                if (a[i] > a[i + 1]) {
+                    // 找到了分区点
+                    index = i;
+                    //和a[n-1] 比较确定最后应该查找的区间
+                    if (a[i] > target) {
+                        if (a[n - 1] > target) {
+                            //在 a[i+1] ~ a[n-1] 之间二分查找
+                            low = i + 1;
+                            high = n - 1;
+                            mid = low + ((high - low) >> 1);
+                            while (low < high) {
+                                if (a[mid] == target) {
+                                    return mid;
+                                } else if (a[mid] > target) {
+                                    high = mid - 1;
+                                    mid = low + ((high - low) >> 1);
+                                } else {
+                                    low = mid + 1;
+                                    mid = low + ((high - low) >> 1);
+                                }
+                            }
+                        } else if(a[n-1] < target){
+                            //在 a[0] ~ a[i] 之间使用二分查找
+                            high = i-1;
+                            mid = low + ((high - low) >> 1);
+                            while (low < high) {
+                                if (a[mid] == target) {
+                                    return mid;
+                                } else if (a[mid] > target) {
+                                    high = mid - 1;
+                                    mid = low + ((high - low) >> 1);
+                                } else {
+                                    low = mid + 1;
+                                    mid = low + ((high - low) >> 1);
+                                }
+                            }
+                        }else{
+                            return n-1;
+                        }
+                    }else{
+                        return -1;
+                    }
+                }
+            }else{
+                if(a[i]==target){
+                    return target;
+                }
+            }
+
+        }
+        return index;
     }
 
 
