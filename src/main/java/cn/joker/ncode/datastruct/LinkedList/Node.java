@@ -19,4 +19,7 @@ public class Node<E extends Comparable<E>> {
     public boolean compare(Node<E> node) {
         return this.value.compareTo(node.value) >= 0;
     }
+
+
+
 }

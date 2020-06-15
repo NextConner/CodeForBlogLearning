@@ -1,6 +1,8 @@
 package cn.joker.ncode.datastruct.search;
 
 
+import java.util.Date;
+
 /**
  * 二分查找算法
  */
@@ -150,12 +152,13 @@ public class BinarySearch {
 
     public static void main(String[] args) {
 
-        int[] a = {5, 6, 7, 8, 1, 2, 3, 4};
+        int[] a = {5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 17, 18, 19, 1, 2, 3, 4,};
         //分界点是3
         int i = 3;
         // a[0] a[3] 有序 , a[4] ~ [n-1] 有序 , a[n-1] < a[0]
         int target = 2;
-        System.out.println(binarySearchInCycleArray(a, 4));
+        System.out.println(binarySearchInCycleArray(a, 16));
+        System.out.println(new Date());
 
     }
 
@@ -169,65 +172,30 @@ public class BinarySearch {
          */
         int n = a.length;
         int index = -1;
-        int low = 0;
-        int high = n - 1;
-        int mid = low + ((high - low) >> 1);
-
         for (int i = 0; i < n; i++) {
 
             if (i != 0 && i != n - 1) {
                 if (a[i] > a[i + 1]) {
                     // 找到了分区点
                     index = i;
-                    //和a[n-1] 比较确定最后应该查找的区间
-                    if (a[i] > target) {
-                        if (a[n - 1] > target) {
-                            //在 a[i+1] ~ a[n-1] 之间二分查找
-                            low = i + 1;
-                            high = n - 1;
-                            mid = low + ((high - low) >> 1);
-                            while (low < high) {
-                                if (a[mid] == target) {
-                                    return mid;
-                                } else if (a[mid] > target) {
-                                    high = mid - 1;
-                                    mid = low + ((high - low) >> 1);
-                                } else {
-                                    low = mid + 1;
-                                    mid = low + ((high - low) >> 1);
-                                }
-                            }
-                        } else if(a[n-1] < target){
-                            //在 a[0] ~ a[i] 之间使用二分查找
-                            high = i-1;
-                            mid = low + ((high - low) >> 1);
-                            while (low < high) {
-                                if (a[mid] == target) {
-                                    return mid;
-                                } else if (a[mid] > target) {
-                                    high = mid - 1;
-                                    mid = low + ((high - low) >> 1);
-                                } else {
-                                    low = mid + 1;
-                                    mid = low + ((high - low) >> 1);
-                                }
-                            }
-                        }else{
-                            return n-1;
-                        }
-                    }else{
-                        return -1;
-                    }
-                }
-            }else{
-                if(a[i]==target){
-                    return target;
+                    break;
                 }
             }
-
         }
-        return index;
+
+        if (a[index] == target) {
+            return index;
+        } else if (a[index] > target) {
+            if (a[n - 1] > target) {
+                return binarySearchRecursive(a, index + 1, n, target);
+            } else if (a[n - 1] < target) {
+                return binarySearchRecursive(a, 0, index, target);
+            } else {
+                return n - 1;
+            }
+        } else {
+            return -1;
+        }
+
     }
-
-
 }
