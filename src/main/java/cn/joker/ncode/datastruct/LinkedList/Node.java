@@ -1,6 +1,8 @@
 package cn.joker.ncode.datastruct.LinkedList;
 
-/** 继承了Comparable 的泛型Node类，用来构造链表
+/**
+ * 继承了Comparable 的泛型Node类，用来构造链表
+ *
  * @Author: zoujintao@daoran.tv
  * @Date: 2020/5/21 12:38
  */
@@ -16,10 +18,13 @@ public class Node<E extends Comparable<E>> {
         this.value = value;
     }
 
+
     public boolean compare(Node<E> node) {
         return this.value.compareTo(node.value) >= 0;
     }
 
-
-
+    @Override
+    public boolean equals(Object obj) {
+        return this.value == ((Node) obj).value;
+    }
 }

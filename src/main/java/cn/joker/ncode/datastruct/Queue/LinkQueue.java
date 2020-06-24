@@ -36,17 +36,45 @@ public class LinkQueue<E extends Comparable<E>> {
     }
 
 
+    public boolean isNull(){
+        return head==null;
+    }
+
     //dequeue
     public E deQueue() {
         Node<E> out;
         //需要判断队列为空
-        if (head.next == tail.next) {
+        if (head == null) {
             return null;
         }
         //头节点出
         out = head;
         head = head.next;
         return out.value;
+    }
+
+    public static void main(String[] args) {
+
+        LinkQueue<Integer> queue = new LinkQueue<>();
+
+        for(int i=0;i<10;i++){
+            queue.enqueue(i);
+        }
+
+
+        while(!queue.isNull()){
+            System.out.print(queue.deQueue());
+        }
+
+        for(int i=10;i<20;i++){
+            queue.enqueue(i);
+        }
+        System.out.println("'");
+
+        while(!queue.isNull()){
+            System.out.print(queue.deQueue());
+        }
+
     }
 
 }
