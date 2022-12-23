@@ -101,10 +101,10 @@ public class Recursive {
 
     public static void main(String[] args) {
 
-        pai(new int[]{1,2,3,4,5}, 0, 5);
+//        pai(new int[]{1,2,3,4,5}, 0, 5);
 
-//        int num =22;
-//        System.out.println(natureNumCount(num,1));
+        int num =17;
+        System.out.println(natureNumCount(num,1));
 
 //          String numberCode = "13570351393";
 //        ArrayList<String> list = new ArrayList<>();
