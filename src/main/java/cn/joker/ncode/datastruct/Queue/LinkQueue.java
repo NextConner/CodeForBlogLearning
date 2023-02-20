@@ -50,7 +50,7 @@ public class LinkQueue<E extends Comparable<E>> {
         //头节点出
         out = head;
         head = head.next;
-        return out.value;
+        return out.val;
     }
 
     public static void main(String[] args) {

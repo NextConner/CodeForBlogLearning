@@ -110,7 +110,7 @@ public class LockFreeQueue<E extends Comparable<E>> {
             //正确获得了队列的快照
             if (head == oldHead) {
                 head = next;
-                out = next.value;
+                out = next.val;
                 break;
             }
         }

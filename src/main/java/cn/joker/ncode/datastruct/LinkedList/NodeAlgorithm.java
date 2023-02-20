@@ -64,7 +64,7 @@ public class NodeAlgorithm<E extends Comparable> {
 
         //输出
         while(first.next!=null){
-            System.out.println((first.next.value + " ---> "));
+            System.out.println((first.next.val + " ---> "));
             first = first.next;
         }
         System.out.println("null");
@@ -179,20 +179,20 @@ public class NodeAlgorithm<E extends Comparable> {
      * LeetCode 第2题，两数之和
      * 给定 A,B 单链表, 逆序存储非负整数，返回相加表示的的逆序链表，例如: 1-2-3 , 4-5-6 , 输出 : 5-7-8
      */
-    public static Node<Integer> linkSum(Node<Integer> headA, Node<Integer> headB){
+    public static Node<Integer> linkSum(Node<Integer> l1, Node<Integer> l2){
 
         int sumResult= 0 ;
         int sq=0;
-        while(headA!=null && headB!=null){
+        while(l1!=null && l2!=null){
             //当前数字的位数
             int munumber = (int) Math.pow(10,sq);
 
-            int anum = headA.value*munumber;
-            int bnum = headB.value*munumber;
+            int anum = l1.val *munumber;
+            int bnum = l2.val *munumber;
             sumResult=sumResult + anum+bnum;
             sq++;
-            headA=headA.next;
-            headB=headB.next;
+            l1=l1.next;
+            l2=l2.next;
         }
         System.out.println(sumResult);
 
@@ -227,7 +227,7 @@ public class NodeAlgorithm<E extends Comparable> {
         E.next=F;
 
         Node<Integer> node = linkSum(A,D);
-        System.out.println(node.value + " : "+node.next.value + " : "+node.next.next.value);
+        System.out.println(node.val + " : "+node.next.val + " : "+node.next.next.val);
 
 
 

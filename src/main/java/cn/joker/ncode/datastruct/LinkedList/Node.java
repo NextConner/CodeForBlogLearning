@@ -8,23 +8,23 @@ package cn.joker.ncode.datastruct.LinkedList;
  */
 public class Node<E extends Comparable<E>> {
 
-    public E value;
+    public E val;
     public Node<E> next;
 
     public Node() {
     }
 
-    public Node(E value) {
-        this.value = value;
+    public Node(E val) {
+        this.val = val;
     }
 
 
     public boolean compare(Node<E> node) {
-        return this.value.compareTo(node.value) >= 0;
+        return this.val.compareTo(node.val) >= 0;
     }
 
     @Override
     public boolean equals(Object obj) {
-        return this.value == ((Node) obj).value;
+        return this.val == ((Node) obj).val;
     }
 }
