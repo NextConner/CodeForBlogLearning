@@ -17,27 +17,30 @@ public class SumThreeNums {
 
         Arrays.sort(nums);
         List<List<Integer>> result = new ArrayList<>();
-        boolean isZero=false;
-
+       StringBuffer indexStr = new StringBuffer();
+        if (nums[0] > 0) {
+            return result;
+        }
         for (int i = 0; i < nums.length - 1; i++) {
             int left = 1;
-            if (nums[left] > 0) {
-                return result;
-            }
+
             int right = nums.length - 1;
             while (left < right) {
                 if (i == left || i == right) {
                     break;
                 }
                 int sum = nums[left] + nums[right] + nums[i];
-                if(!isZero && nums[left] == nums[i] && nums[i] == nums[right] && nums[right]==0){
-                     isZero=true;
-                }else if(isZero){
-                     break;
-                }
                 if (sum == 0) {
-                    result.add(Arrays.asList(nums[left],nums[right],nums[i]));
-                    break;
+                    String[] temp = new String[]{String.valueOf(nums[left]), String.valueOf(nums[right]), String.valueOf(nums[i])};
+                    Arrays.sort(temp);
+                    String a = temp[0]+temp[1]+temp[2];
+                    if (indexStr.indexOf(a) < 0) {
+                        indexStr.append(a);
+                        result.add(Arrays.asList(nums[left], nums[right], nums[i]));
+                    }else{
+                        break;
+                    }
+
                 } else if (sum > 0) {
                     right--;
                 } else {
@@ -69,9 +72,10 @@ public class SumThreeNums {
 
     public static void main(String[] args) {
 
-        int[] array = {-1,0,1,2,-1,-4};
-        int[] array1 = {0,0,0,0,0};
-        System.out.println(new SumThreeNums().threeSum(array1));
+        int[] array = {-1, 0, 1, 2, -1, -4};
+        int[] array1 = {0, 0, 0, 0, 0};
+        int[] array2 = {1,1,-2};
+        System.out.println(new SumThreeNums().threeSum(array2));
     }
 
 }
