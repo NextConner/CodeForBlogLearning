@@ -1,10 +1,6 @@
 package cn.joker.ncode.datastruct.sort;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
-
-import java.io.File;
-import java.util.List;
+import java.util.Objects;
 
 public class BucketSort {
 
@@ -160,7 +156,7 @@ public class BucketSort {
             return start;
         }
         String p = nums[end - 1];
-        if (StringUtils.isBlank(p)) {
+        if (Objects.nonNull(p)) {
             return start;
         }
         int k =9;
@@ -169,7 +165,7 @@ public class BucketSort {
         while (bit > 0) {
             while(bitNumber >0){
                 for (int j = 0; j < nums.length; j++) {
-                    if (StringUtils.isBlank(nums[j])) {
+                    if (Objects.nonNull(nums[j])) {
                         continue;
                     }
                     int nbitNumber = Integer.valueOf(nums[j].split("")[bit]);
@@ -212,17 +208,6 @@ public class BucketSort {
 
     public static void main(String[] args) throws Exception {
 
-//        int[] a={2,3,3,3,4,5,6,7,8,8,8,9,0,11,2,32,14,5,6,7,8,1,23,45,34,56,23,5,2,65,65,65,65,7,4,};
-//        counterSort(a);
-
-        List<String> list = FileUtils.readLines(new File("E:\\pythonData\\phoneNum.txt"), "UTF-8");
-
-        List<String> list1 = list.subList(0, 2000);
-
-        radisSort(list1.toArray(new String[0]));
-        System.out.println(list1);
-//        String[] nums = {"13570351393", "13573311492", "13570351351", "11370351393", "13570356333"};
-//        phoneSort(nums);
     }
 
 
