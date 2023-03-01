@@ -1,4 +1,4 @@
-package cn.joker.ncode.datastruct.leetCode;
+package cn.joker.ncode.datastruct.leetCode.dp.easy;
 
 
 /**

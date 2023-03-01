@@ -1,5 +1,8 @@
 package cn.joker.ncode.datastruct.tree;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TreePractise {
 
     //树结构
@@ -179,6 +182,34 @@ public class TreePractise {
         System.out.print(root.val + " ");
         frontTraverse(root.right);
     }
+
+
+    /**
+     *  for循环实现中序遍历
+     * @param root
+     */
+    public static void middleTraverseByCycle(TreeNode root) {
+
+        List<Integer> result = new ArrayList<>();
+
+        if (null == root) {
+            return;
+        }
+        while(root!=null){
+            if(root.left!=null){
+                result.add(root.left.val);
+                result.add(root.val);
+            }
+            if(root.right!=null){
+                
+            }
+        }
+
+//        frontTraverse(root.left);
+//        System.out.print(root.val + " ");08777777777777777777777
+//        frontTraverse(root.right);
+    }
+
 
     //后序遍历
     public static void backTraverse(TreeNode root) {
