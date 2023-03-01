@@ -1,6 +1,6 @@
 package cn.joker.ncode.datastruct.Stack;
 
-import org.apache.commons.lang3.StringUtils;
+import java.util.Objects;
 
 /** 基于栈的应用场景
  * @Author: zoujintao@daoran.tv
@@ -24,7 +24,7 @@ public class StackPractise {
         // 将操作数和运算符压栈
         for(String str : numberOperator){
 
-            if(StringUtils.isNotBlank(str)){
+            if(Objects.nonNull(str)){
                 //                System.out.println(str);
                 if(numStr.indexOf(str)>-1){
                     // 操作数压栈
@@ -127,7 +127,7 @@ public class StackPractise {
 
         String[] brakeArray = str.split("");
         for (int i = 0; i < str.length(); i++) {
-            if (StringUtils.isNotBlank(brakeArray[i])) {
+            if (Objects.nonNull(brakeArray[i])) {
                 stackLeft.push(brakeArray[i]);
             }
         }
