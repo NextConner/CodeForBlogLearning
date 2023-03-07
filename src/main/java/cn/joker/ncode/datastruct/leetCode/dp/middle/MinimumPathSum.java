@@ -15,10 +15,11 @@ public class MinimumPathSum {
         int n =grid.length;
         int m = grid[0].length;
 
-        int[][]dp = new int[n][m];
+        int[] dp = new int[m+n];
         //TODO dp 状态转移方程
 
-        return dp[n-1][m-1];
+
+        return dp[n-1];
     }
 
 
