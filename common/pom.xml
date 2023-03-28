@@ -7,13 +7,31 @@
         <groupId>cn.joker</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
+    <packaging>jar</packaging>
     <modelVersion>4.0.0</modelVersion>
-
-    <artifactId>basic</artifactId>
+    <artifactId>common</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+
+        <!-- tools jar  -->
+        <dependency>
+            <groupId>com.sun</groupId>
+            <artifactId>tools</artifactId>
+            <version>1.8.0</version>
+            <scope>system</scope>
+            <systemPath>D:\github\CodeForBlogLearning\common\lib\tools.jar</systemPath>
+        </dependency>
+
+    </dependencies>
 
 </project>

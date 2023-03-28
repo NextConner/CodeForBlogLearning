@@ -6,7 +6,8 @@
     <modules>
         <module>bytecode</module>
 		<module>basic</module>
-	</modules>
+        <module>agent</module>
+    </modules>
 
 	<groupId>cn.joker</groupId>
 	<artifactId>ncode</artifactId>
