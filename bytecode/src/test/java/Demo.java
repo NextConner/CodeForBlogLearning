@@ -1,11 +1,9 @@
-package cn.joker.agent;
-
 import cn.joker.common.anno.AgentLog;
 import com.sun.tools.attach.VirtualMachine;
 import com.sun.tools.attach.VirtualMachineDescriptor;
+import org.apache.log4j.BasicConfigurator;
 
 import java.lang.management.ManagementFactory;
-import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -14,6 +12,8 @@ public class Demo {
     
     public static void main(String[] args) throws Exception {
 
+        //log config
+        BasicConfigurator.configure();
 
         System.out.println("Start Demo main !" + new Date());
         String name = ManagementFactory.getRuntimeMXBean().getName();

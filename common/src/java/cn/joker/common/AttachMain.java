@@ -14,13 +14,13 @@ public class AttachMain {
         for (VirtualMachineDescriptor vmm : VirtualMachine.list()) {
             System.out.println(vmm.displayName());
         }
-
-        VirtualMachine vm = VirtualMachine.attach("131784");
+        VirtualMachine vm = VirtualMachine.attach("136232");
         while(true) {
             vm.loadAgent("D:\\github\\CodeForBlogLearning\\agent\\target\\agent-jar-with-dependencies.jar");
             vm.detach();
             sleep(3000);
         }
+
     }
 
 }
