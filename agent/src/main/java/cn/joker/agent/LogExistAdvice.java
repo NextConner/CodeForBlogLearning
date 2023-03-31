@@ -20,6 +20,8 @@ public class LogExistAdvice {
 
     public static Logger logger = LoggerFactory.getLogger(LogExistAdvice.class);
 
+    static public Boolean run = true;
+
     static {
         //log config
         BasicConfigurator.configure();
@@ -32,6 +34,10 @@ public class LogExistAdvice {
             @Advice.Origin Method method,
             @Advice.AllArguments(readOnly = false, typing = Assigner.Typing.DYNAMIC)
             Object... args) {
+
+        if(!run){
+            return result;
+        }
 
         if (null != args && args.length > 0) {
             for (Object par : args) {

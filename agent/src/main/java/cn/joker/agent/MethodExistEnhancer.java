@@ -1,5 +1,6 @@
 package cn.joker.agent;
 
+import cn.joker.common.advice.IMethodLogAdvice;
 import cn.joker.common.anno.AgentLog;
 import cn.joker.common.anno.EnterMethodAdvice;
 import net.bytebuddy.ByteBuddy;
@@ -19,13 +20,13 @@ import net.bytebuddy.matcher.ElementMatchers;
 
 public class MethodExistEnhancer {
 
-    public static void enhance(Class clazz){
+    public static void enhance(Class clazz , Class<? extends IMethodLogAdvice> adviceClass){
 
         ByteBuddyAgent.install();
         new ByteBuddy()
                 .rebase(clazz)
                 .visit(
-                        Advice.to(LogExistAdvice.class)
+                        Advice.to(adviceClass)
                                 .on(ElementMatchers.isAnnotatedWith(EnterMethodAdvice.class)
                                         .or(ElementMatchers.isAnnotatedWith(AgentLog.class)))
                 )
