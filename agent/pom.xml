@@ -17,11 +17,13 @@
     </properties>
 
     <dependencies>
+
         <dependency>
             <groupId>cn.joker</groupId>
             <artifactId>common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+
 
         <!-- class pool -->
         <dependency>
@@ -30,16 +32,6 @@
             <version>3.12.1.GA</version>
         </dependency>
 
-
-
-        <!-- tools jar  -->
-        <dependency>
-            <groupId>com.sun</groupId>
-            <artifactId>tools</artifactId>
-            <version>1.8.0</version>
-            <scope>system</scope>
-            <systemPath>D:\github\CodeForBlogLearning\common\lib\tools.jar</systemPath>
-        </dependency>
 
     </dependencies>
 
@@ -55,8 +47,8 @@
                     </descriptorRefs>
                     <archive>
                         <manifestEntries>
-                            <Premain-Class>cn.joker.agent.DefaultDemoAgent</Premain-Class>
-                            <Agent-Class>cn.joker.agent.DefaultDemoAgent</Agent-Class>
+                            <Premain-Class>cn.joker.agent.ByteBuddyAgent</Premain-Class>
+                            <Agent-Class>cn.joker.agent.ByteBuddyAgent</Agent-Class>
                             <Can-Redefine-Classes>true</Can-Redefine-Classes>
                             <Can-Retransform-Classes>true</Can-Retransform-Classes>
                         </manifestEntries>

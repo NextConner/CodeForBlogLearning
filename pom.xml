@@ -7,7 +7,8 @@
         <module>bytecode</module>
 		<module>basic</module>
         <module>agent</module>
-    </modules>
+		<module>common</module>
+	</modules>
 
 	<groupId>cn.joker</groupId>
 	<artifactId>ncode</artifactId>
@@ -20,24 +21,14 @@
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>net.bytebuddy</groupId>
-			<artifactId>byte-buddy</artifactId>
-			<version>RELEASE</version>
-		</dependency>
-
-		<dependency>
-			<groupId>net.bytebuddy</groupId>
-			<artifactId>byte-buddy-agent</artifactId>
-			<version>1.12.19</version>
-		</dependency>
 
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>1.18.24</version>
-			<scope>compile</scope>
+			<optional>true</optional>
 		</dependency>
+
 
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -51,11 +42,14 @@
 			<version>2.0.4</version>
 		</dependency>
 
+
+
 	</dependencies>
 
 	<!-- 外部依赖管理 -->
 	<dependencyManagement>
-		<dependencies>
+	<!--
+	<dependencies>
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-dependencies</artifactId>
@@ -74,6 +68,7 @@
 				<version>2021.1</version>
 			</dependency>
 		</dependencies>
+		-->
 	</dependencyManagement>
 
 
