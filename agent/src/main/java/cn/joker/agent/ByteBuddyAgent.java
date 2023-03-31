@@ -35,9 +35,9 @@ public class ByteBuddyAgent {
         log.info(" attach agent main args : {}" , arguments);
 
         Scanner scanner = new Scanner(System.in);
-        while(scanner.hasNextLine()){
+        if(arguments != null){
 
-            String args = scanner.nextLine();
+            String args =arguments;
             if(args.equals("exit")){
                 log.info(" exit agent main command !");
                 LogMethodInfoAdvice.printCounter =new AtomicInteger(0);
