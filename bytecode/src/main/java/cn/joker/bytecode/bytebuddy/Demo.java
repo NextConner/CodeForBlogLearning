@@ -15,8 +15,8 @@ public class Demo {
 
     public static void main(String[] args) throws Exception {
 
-        //log config
-        BasicConfigurator.configure();
+//        //log config
+//        BasicConfigurator.configure();
 
         String name = ManagementFactory.getRuntimeMXBean().getName();
         // get pid
@@ -26,12 +26,11 @@ public class Demo {
         File file = new File("D:\\pid");
         file.deleteOnExit();
         file.createNewFile();
-        IOUtils.write(pid,new FileOutputStream(file), StandardCharsets.UTF_8.displayName());
+        IOUtils.write(pid, new FileOutputStream(file), StandardCharsets.UTF_8.displayName());
 
         new Thread(() -> {
-            Person demo = new Person();
             while (true) {
-                log.info("  --- {}  ", demo.hello(System.currentTimeMillis()));
+                log.info("  --- {}  ", new Person().hello(System.currentTimeMillis()));
                 try {
                     TimeUnit.SECONDS.sleep(20);
                 } catch (Exception e) {
@@ -42,7 +41,6 @@ public class Demo {
 
 
     }
-
 
 
 }

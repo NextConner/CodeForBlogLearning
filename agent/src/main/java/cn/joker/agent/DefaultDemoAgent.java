@@ -42,6 +42,9 @@ public class DefaultDemoAgent {
     //运行时动态 attach
     public static void agentmain(String args, Instrumentation ist) throws ClassNotFoundException, UnmodifiableClassException {
         System.out.println(System.currentTimeMillis() + "agentmain!");
+
+
+
     }
 
 }

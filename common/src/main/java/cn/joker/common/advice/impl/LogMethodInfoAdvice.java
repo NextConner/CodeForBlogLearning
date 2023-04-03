@@ -59,13 +59,13 @@ public class LogMethodInfoAdvice implements IMethodLogAdvice {
 
     @Advice.OnMethodExit
     @RuntimeType
-    public static Object enhance(@Advice.Return Object result,
+    public static void enhance(@Advice.Return Object result,
                                 @Advice.Origin Method method,
                                 @Advice.AllArguments(readOnly = false, typing = Assigner.Typing.DYNAMIC)
                                              Object... args ) {
 
         while(printCounter.decrementAndGet() < 0){
-            return result;
+            return;
         }
 
         JSONObject json = new JSONObject();
@@ -100,6 +100,5 @@ public class LogMethodInfoAdvice implements IMethodLogAdvice {
 
         logger.info(json.toJSONString());
 
-        return result;
     }
 }

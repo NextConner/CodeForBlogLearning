@@ -1,7 +1,5 @@
-package cn.joker.agent;
+package cn.joker.common.enhancer;
 
-import cn.joker.common.advice.IMethodLogAdvice;
-import cn.joker.common.advice.impl.LogMethodInfoAdvice;
 import cn.joker.common.anno.AgentLog;
 import cn.joker.common.anno.EnterMethodAdvice;
 import net.bytebuddy.ByteBuddy;
