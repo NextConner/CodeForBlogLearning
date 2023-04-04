@@ -1,6 +1,6 @@
 package cn.joker.common.tcp.client;
 
-import cn.joker.common.tcp.handle.SimpleMsgInboundHandler;
+import cn.joker.common.tcp.client.handler.LocalCommandInboundHandler;
 import cn.joker.common.tcp.server.SimpleTcpServer;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
@@ -8,8 +8,6 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 import io.netty.util.CharsetUtil;
-
-import java.lang.instrument.Instrumentation;
 
 /**
  * @author jintaoZou
@@ -32,7 +30,7 @@ public class ClientHandlerInitializer extends ChannelInitializer<SocketChannel> 
 //        pipeline.addLast(new IdleStateHandler(0,5,0));
         pipeline.addLast(new StringDecoder(CharsetUtil.UTF_8));
         pipeline.addLast(new StringEncoder(CharsetUtil.UTF_8));
-        pipeline.addLast(new SimpleMsgInboundHandler(simpleTcpServer));
+        pipeline.addLast(new LocalCommandInboundHandler());
 //        pipeline.addLast(new ProtoMsgCodec());
 //        pipeline.addLast(new ProtoMsgHandler());
 //        pipeline.addLast(new Pinger());

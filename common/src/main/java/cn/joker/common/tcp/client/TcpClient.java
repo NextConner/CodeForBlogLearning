@@ -22,10 +22,7 @@ public class TcpClient {
 
     private String host;
     private int port;
-    private Bootstrap bootstrap;
     private EventLoopGroup group;
-
-    private Channel channel;
 
     public TcpClient(String host, int port) {
         this.host = host;
@@ -40,11 +37,28 @@ public class TcpClient {
                 .channel(NioSocketChannel.class)
                 .option(ChannelOption.AUTO_CLOSE,true)
                 .handler(new ClientHandlerInitializer(null));
-        return bootstrap.connect("localhost", 8088).channel();
+        return bootstrap.connect(host, port).channel();
     }
 
     public void shutdown(){
         this.group.shutdownGracefully();
     }
+
+    public static void main(String[] args) throws InterruptedException {
+
+        for(int i=0;i<20;i++){
+            new Thread(
+                    ()-> {local.set(Thread.currentThread().toString());
+                        System.out.println(local.get());
+                    }
+            ).start();
+        }
+
+//        new TcpClient("localhost",52661).start(args);
+
+    }
+
+    static ThreadLocal<String> local = new ThreadLocal<>();
+
 
 }

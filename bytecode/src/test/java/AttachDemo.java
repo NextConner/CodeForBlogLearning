@@ -90,8 +90,8 @@ public class AttachDemo {
                             String nextLine = scanner.nextLine();
                             if(nextLine.equals("exit")){
                                 channel.writeAndFlush(nextLine);
-//                                TimeUnit.SECONDS.sleep(3);
-//                                tcpClient.shutdown();
+                                TimeUnit.SECONDS.sleep(2);
+                                tcpClient.shutdown();
                                 return;
                             }
                             channel.writeAndFlush(nextLine);

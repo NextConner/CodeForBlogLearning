@@ -1,6 +1,8 @@
 package cn.joker.common.advice.impl;
 
 import cn.joker.common.advice.IMethodLogAdvice;
+import cn.joker.common.command.LocalCommand;
+import cn.joker.common.tcp.server.handler.SimpleMsgInboundHandler;
 import com.alibaba.fastjson.JSONObject;
 import net.bytebuddy.asm.Advice;
 import net.bytebuddy.implementation.bind.annotation.RuntimeType;
@@ -10,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -31,7 +34,6 @@ public class LogMethodInfoAdvice implements IMethodLogAdvice {
     public static AtomicBoolean isPrintReturn = new AtomicBoolean(false);
 
     public static AtomicReference<String> methodInfo = new AtomicReference<>();
-
 
 
     public static  void init(int printTimes, int paramLevel, boolean printReturn) {
@@ -65,6 +67,7 @@ public class LogMethodInfoAdvice implements IMethodLogAdvice {
                                              Object... args ) {
 
         while(printCounter.decrementAndGet() < 0){
+            SimpleMsgInboundHandler.resultCache.set(null);
             return;
         }
 
@@ -99,6 +102,8 @@ public class LogMethodInfoAdvice implements IMethodLogAdvice {
         }
 
         logger.info(json.toJSONString());
-
+        LocalCommand localCommand = SimpleMsgInboundHandler.resultCache.get();
+        localCommand.setResult(json.toJSONString());
+        SimpleMsgInboundHandler.resultCache.set(localCommand);
     }
 }
