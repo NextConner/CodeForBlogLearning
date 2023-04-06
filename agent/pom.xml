@@ -47,8 +47,8 @@
                     </descriptorRefs>
                     <archive>
                         <manifestEntries>
-                            <Premain-Class>cn.joker.agent.MyByteBuddyAgent</Premain-Class>
-                            <Agent-Class>cn.joker.agent.MyByteBuddyAgent</Agent-Class>
+<!--                            <Premain-Class>cn.joker.agent.MyByteBuddyAgent</Premain-Class>-->
+                            <Agent-Class>cn.joker.common.tcp.server.handler.SimpleMsgInboundHandler</Agent-Class>
                             <Can-Redefine-Classes>true</Can-Redefine-Classes>
                             <Can-Retransform-Classes>true</Can-Retransform-Classes>
                         </manifestEntries>

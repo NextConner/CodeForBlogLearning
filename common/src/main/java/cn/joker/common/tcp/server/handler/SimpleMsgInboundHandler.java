@@ -9,6 +9,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import net.bytebuddy.agent.Installer;
 
+import java.lang.instrument.Instrumentation;
 import java.util.Date;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
@@ -54,7 +55,7 @@ public class SimpleMsgInboundHandler extends SimpleChannelInboundHandler<String>
             resultCache.set(command);
             Installer.agentmain(args, simpleTcpServer.getInstrumentation());
             try {
-                MethodExistEnhancer.enhance(Class.forName(className), LogMethodInfoAdvice.class);
+                command.setAgentType(Class.forName(className));
             } catch (Exception e) {
             } finally {
                 while (null == resultCache.get().getResult()) {
@@ -70,6 +71,31 @@ public class SimpleMsgInboundHandler extends SimpleChannelInboundHandler<String>
 
         } else if (msg.toUpperCase().equals(Command.EXIT.name())) {
             simpleTcpServer.shutdown();
+        }
+    }
+
+    static ThreadLocal<SimpleTcpServer> threadLocal = new ThreadLocal<>();
+
+    public static void agentmain(String arguments, Instrumentation instrumentation) {
+
+
+        if(arguments.startsWith(Command.ATTACH.name()) && null == threadLocal.get()){
+            final int port = Integer.valueOf(arguments.split(":")[1]);
+            new Thread(() ->{
+                SimpleTcpServer server = new SimpleTcpServer(port);
+                server.start(instrumentation);
+                threadLocal.set(server);
+            }).start();
+        }else{
+
+            Installer.agentmain(arguments, instrumentation);
+            try {
+                while(null != resultCache.get() && null != resultCache.get().getAgentType()) {
+                    MethodExistEnhancer.enhance(resultCache.get().getAgentType(), LogMethodInfoAdvice.class);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

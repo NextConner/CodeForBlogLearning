@@ -27,8 +27,8 @@ public class MethodExistEnhancer {
                 .visit(
                         Advice.to(adviceClass)
                                 .on(ElementMatchers.isAnnotatedWith(EnterMethodAdvice.class)
-                                        .or(ElementMatchers.isAnnotatedWith(AgentLog.class)))
-                )
+                                        .or(ElementMatchers.isAnnotatedWith(AgentLog.class))
+                                ))
                 .make()
                 .load(Thread.currentThread().getContextClassLoader(), ClassReloadingStrategy.fromInstalledAgent());
     }

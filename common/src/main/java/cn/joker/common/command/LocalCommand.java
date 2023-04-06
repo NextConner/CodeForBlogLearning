@@ -19,6 +19,7 @@ public class LocalCommand {
 
     private Command type;
     private Date reqTime;
+    private Class agentType;
     private Date respTime;
     private Object result;
 

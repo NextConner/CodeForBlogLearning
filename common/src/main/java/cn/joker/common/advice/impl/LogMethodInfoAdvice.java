@@ -61,14 +61,14 @@ public class LogMethodInfoAdvice implements IMethodLogAdvice {
 
     @Advice.OnMethodExit
     @RuntimeType
-    public static void enhance(@Advice.Return Object result,
+    public static Object enhance(@Advice.Return Object result,
                                 @Advice.Origin Method method,
                                 @Advice.AllArguments(readOnly = false, typing = Assigner.Typing.DYNAMIC)
                                              Object... args ) {
 
         while(printCounter.decrementAndGet() < 0){
             SimpleMsgInboundHandler.resultCache.set(null);
-            return;
+            return result;
         }
 
         JSONObject json = new JSONObject();
@@ -105,5 +105,6 @@ public class LogMethodInfoAdvice implements IMethodLogAdvice {
         LocalCommand localCommand = SimpleMsgInboundHandler.resultCache.get();
         localCommand.setResult(json.toJSONString());
         SimpleMsgInboundHandler.resultCache.set(localCommand);
+        return result;
     }
 }
