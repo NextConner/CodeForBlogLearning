@@ -1,48 +1,32 @@
-import cn.joker.common.advice.IMethodLogAdvice;
-import cn.joker.common.advice.impl.LogMethodInfoAdvice;
-import cn.joker.common.anno.AgentLog;
-import cn.joker.common.anno.EnterMethodAdvice;
 import cn.joker.common.command.Command;
-import cn.joker.common.command.LocalCommand;
 import cn.joker.common.tcp.client.TcpClient;
-import com.sun.jna.platform.win32.Shell32Util;
 import com.sun.tools.attach.AgentInitializationException;
 import com.sun.tools.attach.AgentLoadException;
 import com.sun.tools.attach.AttachNotSupportedException;
 import com.sun.tools.attach.VirtualMachine;
 import io.netty.channel.Channel;
-import io.netty.channel.ChannelFuture;
+import jdk.internal.reflect.Reflection;
 import lombok.extern.slf4j.Slf4j;
-import net.bytebuddy.ByteBuddy;
 import net.bytebuddy.agent.ByteBuddyAgent;
-import net.bytebuddy.agent.Installer;
-import net.bytebuddy.asm.Advice;
-import net.bytebuddy.dynamic.loading.ClassReloadingStrategy;
-import net.bytebuddy.matcher.ElementMatchers;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.BasicConfigurator;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.instrument.Instrumentation;
 import java.lang.reflect.InvocationTargetException;
 import java.net.ServerSocket;
 import java.nio.charset.StandardCharsets;
-import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
 public class AttachDemo {
 
     public static void main(String[] args) throws Exception {
+
+        System.out.println(Reflection.getCallerClass().getSimpleName());
 
         //log config
         BasicConfigurator.configure();

@@ -1,5 +1,6 @@
 package cn.joker.agent;
 
+import jdk.internal.reflect.Reflection;
 import net.bytebuddy.asm.Advice;
 import net.bytebuddy.implementation.bind.annotation.RuntimeType;
 import net.bytebuddy.implementation.bytecode.assign.Assigner;
